@@ -1,0 +1,31 @@
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
+
+// External libraries
+@import "bootstrap";
+@import "font-awesome";
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+
+
+
+.custom-image-container {
+  height: 200px; /* Set the height of the visible part */
+  overflow: hidden; /* Hide the overflowing part of the image */
+}
+
+.text-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fa-quote-left {
+  color: green;
+}

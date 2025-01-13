@@ -1,0 +1,24 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="row d-flex align-items-center justify-content-between mb-3 pr-4 mr-4">
+
+    <div class="col-auto">
+      <h1> <%=@category.name %></h1>
+    </div>
+
+    <div class="col-auto d-flex flex-column">
+      <%= link_to categories_path() do %>
+        <button type="button" class="btn btn-primary"> Back <i class="fa-solid fa-arrow-left-long"></i></button>
+      <%end%>
+      <%= link_to new_category_bookmark_path(@category) do %>
+        <button type="button" class="btn btn-success"> Add a Recipe <i class="fa-solid fa-plus"></i> </button>
+      <% end %>
+      <%= link_to edit_category_path(@category) do %>
+         <button type="button" class="btn btn-warning"> Edit Category<i class="fa-solid fa-pen-to-square"></i></button>
+      <%end%>
+      <%= link_to categories_path(@category), method: :delete do%>
+        <button type="button" class="btn btn-danger"> Delete Category <i class="fa-solid fa-trash"></i> </button>
+      <% end %>
+    </div>
+
+  </div>
+</div>

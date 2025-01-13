@@ -1,0 +1,6 @@
+
+<%= simple_form_for([@category, @bookmark]) do |f| %>
+<%= f.input :comment%>
+<%= f.input :recipe_id, collection: Recipe.all%>
+    <%= f.button :submit %>
+<% end %>

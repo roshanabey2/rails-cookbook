@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :categories
+  resources :bookmarks
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,5 +13,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "recipes#index"
+  resources :recipes
+  resources :bookmarks, only: [ :destroy ]
+  resources :categories do
+    resources :bookmarks, only: [ :new, :create ]
+  end
 
 end
