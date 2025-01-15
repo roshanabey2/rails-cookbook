@@ -7,17 +7,49 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-require "json"
-require "open-uri"
+require 'open-uri'
+require 'json'
+Category.destroy_all
+Recipe.destroy_all
+
+categories_api = "https://www.themealdb.com/api/json/v1/1/categories.php"
+categories_serialized = URI.open(categories_api).read
+categories = JSON.parse(categories_serialized)["categories"]
 
 
- 40.times do
+40.times do
   p "Creating Recipe"
   recipe_api = "https://www.themealdb.com/api/json/v1/1/random.php"
-  recipe_serialized = URI.parse(recipe_api).read
+  recipe_serialized = URI.open(recipe_api).read
   recipe = JSON.parse(recipe_serialized)["meals"][0]
-  p recipe
-  new_recipe = Recipe.new({ name: recipe["strMeal"], description: recipe["strInstructions"], image_url: recipe["strMealThumb"], rating: rand(0..10) })
-  new_recipe.save
-  p "#{new_recipe.name} has been added to the database"
+
+  if recipe
+    p "#{recipe["strMeal"]} API object retrived"
+    new_recipe = Recipe.new({
+      name: recipe["strMeal"],
+      description: recipe["strInstructions"],
+      image_url: recipe["strMealThumb"],
+      rating: rand(0.0..10.0).round(1) })
+  end
+
+  if new_recipe.save
+    p "#{new_recipe.name} has been added to the database"
+    categories.each do |category|
+        if (recipe["strCategory"] == category["strCategory"]) &&
+           !(Category.where(name: recipe["strCategory"]).exists?)
+          p "Adding New Category"
+          new_category = Category.new({
+            name: recipe["strCategory"],
+            image_url: category["strCategoryThumb"]
+          })
+          new_category.save ? (p "#{new_category.name} has been added to the database") : (p "#{new_category.name} failed to be added to the database")
+        else
+          p "#{category["strCategory"]} already exists"
+
+        end
+      end
+  else
+    p "#{new_recipe.name} failed to be added to the database"
+    p new_recipe.errors.full_messages
+  end
 end

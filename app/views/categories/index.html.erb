@@ -3,17 +3,18 @@
 <% content_for :title, "Categories" %>
 
 <h1>Categories</h1>
-
-<div class="list-group" id="lists">
-  <% @categories.each do |category| %>
-    <p>
-      <%= link_to "#{category.name}", category, class: "list-group-item list-group-item-action" %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to new_category_path do%>
 <button  type="button" class="btn btn-primary">
   New List <i class="fa-solid fa-plus"></i>
 </button>
 <%end%>
+
+<div class="container" id="categories">
+<div class="row row-cols-1 row-cols-md-2 g-4">
+      <% @categories.each do |category| %>
+        <%= link_to category_path(category), class: "list-group-item list-group-item-action" do %>
+          <%= render category%>
+        <% end %>
+      <%end%>
+</div>
+</div>

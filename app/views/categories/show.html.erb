@@ -27,7 +27,7 @@
           <div class="card-footer">
             <div class="row d-flex align-items-center justify-content-between pr-4 mr-4">
               <div class="col-auto">
-                <i class="fa-solid fa-quote-left"></i><small class="text-body-secondary"><%="#{bookmark.comment}"%></small>
+                <i class="fa-solid fa-quote-left"></i><small class="text-body-secondary"><%="#{bookmark.comment}"%></small> <i class="fa-solid fa-quote-right"></i>
               </div>
               <div class="col-auto">
                 <%= link_to bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "delete-link" do %>
