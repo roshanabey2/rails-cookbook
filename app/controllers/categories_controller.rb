@@ -27,7 +27,6 @@ class CategoriesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-
   end
 
   # PATCH/PUT /categories/1 or /categories/1.json

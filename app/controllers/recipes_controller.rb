@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-    redirect_to recipe_path(@recipe) if @recipe.save
+    @recipe.save ? (redirect_to recipe_path(@recipe)) : (render :new, status: :unprocessable_entity)
   end
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
